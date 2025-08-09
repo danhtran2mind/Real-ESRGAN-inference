@@ -4,7 +4,7 @@ from torch.nn import functional as F
 from PIL import Image
 import numpy as np
 import cv2
-from huggingface_hub import hf_hub_url, cached_download
+from huggingface_hub import hf_hub_url, hf_hub_download
 
 from .rrdbnet_arch import RRDBNet
 from .utils import pad_reflect, split_image_into_overlapping_patches, stich_together, \
@@ -43,7 +43,7 @@ class RealESRGAN:
             cache_dir = os.path.dirname(model_path)
             local_filename = os.path.basename(model_path)
             config_file_url = hf_hub_url(repo_id=config['repo_id'], filename=config['filename'])
-            cached_download(config_file_url, cache_dir=cache_dir, force_filename=local_filename)
+            hf_hub_download(repo_id="repository_id", filename=local_filename, cache_dir=cache_dir)
             print('Weights downloaded to:', os.path.join(cache_dir, local_filename))
         
         loadnet = torch.load(model_path)
