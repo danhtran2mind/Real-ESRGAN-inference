@@ -47,13 +47,13 @@ class RealESRGAN:
             print('Weights downloaded to:', os.path.join(cache_dir, local_filename))
         
         loadnet = torch.load(model_path)
-        # if 'params' in loadnet:
-        #     self.model.load_state_dict(loadnet['params'], strict=True)
-        # elif 'params_ema' in loadnet:
-        #     self.model.load_state_dict(loadnet['params_ema'], strict=True)
-        # else:
-        #     self.model.load_state_dict(loadnet, strict=True)
-        # self.model.load_state_dict(loadnet, strict=True)
+        if 'params' in loadnet:
+            self.model.load_state_dict(loadnet['params'], strict=True)
+        elif 'params_ema' in loadnet:
+            self.model.load_state_dict(loadnet['params_ema'], strict=True)
+        else:
+            self.model.load_state_dict(loadnet, strict=True)
+        self.model.load_state_dict(loadnet, strict=True)
         self.model.eval()
         self.model.to(self.device)
         
