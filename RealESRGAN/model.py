@@ -46,7 +46,7 @@ class RealESRGAN:
             # config_file_url = hf_hub_url(repo_id=config['repo_id'], filename=config['filename'])
             hf_hub_download(repo_id=config['repo_id'],
                             filename=local_filename,
-                            cache_dir=cache_dir,
+                            local_dir=cache_dir,
                             local_dir_use_symlinks=False)
             
             print('Weights downloaded to:', os.path.join(cache_dir, local_filename))
