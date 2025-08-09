@@ -53,7 +53,7 @@ class RealESRGAN:
             self.model.load_state_dict(loadnet['params_ema'], strict=True)
         else:
             self.model.load_state_dict(loadnet, strict=True)
-        self.model.load_state_dict(loadnet, strict=True)
+        # self.model.load_state_dict(loadnet, strict=True)
         self.model.eval()
         self.model.to(self.device)
         
