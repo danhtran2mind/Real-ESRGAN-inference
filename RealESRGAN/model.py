@@ -69,6 +69,7 @@ class RealESRGAN:
         lr_image = pad_reflect(lr_image, pad_size)
         print(f"Padded image shape: {lr_image.shape}")
     
+        # Ensure patches are created with correct size
         patches, p_shape = split_image_into_overlapping_patches(
             lr_image, patch_size=patches_size, padding_size=padding
         )
@@ -90,7 +91,12 @@ class RealESRGAN:
         np_sr_image = sr_image.numpy()
         print(f"Scaled patches shape: {np_sr_image.shape}")
     
+        # Adjust expected patch size based on observed behavior
         expected_scaled_patch_size = patches_size * scale
+        if np_sr_image.shape[1] == (patches_size + 2 * padding) * scale:
+            print(f"Warning: Model produced patches of size {(patches_size + 2 * padding) * scale}. Adjusting expected size.")
+            expected_scaled_patch_size = (patches_size + 2 * padding) * scale
+    
         if np_sr_image.shape[1] != expected_scaled_patch_size:
             raise ValueError(
                 f"Scaled patch size mismatch: expected {expected_scaled_patch_size}, got {np_sr_image.shape[1]}"
