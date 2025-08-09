@@ -48,10 +48,13 @@ class RealESRGAN:
         
         loadnet = torch.load(model_path)
         if 'params' in loadnet:
+            print(" Do 'params'")
             self.model.load_state_dict(loadnet['params'], strict=True)
         elif 'params_ema' in loadnet:
+            print(" Do 'params_ema'")
             self.model.load_state_dict(loadnet['params_ema'], strict=True)
         else:
+            print(" Do 'No'")
             self.model.load_state_dict(loadnet, strict=True)
         # self.model.load_state_dict(loadnet, strict=True)
         self.model.eval()
