@@ -32,7 +32,7 @@ class RealESRGAN:
         self.device = device
         self.scale = scale
         self.model = RRDBNet(
-            num_in_ch=3, num_out_ch=3, num_feat=64, 
+            num_in_ch=12, num_out_ch=3, num_feat=64, 
             num_block=23, num_grow_ch=32, scale=scale
         )
         
